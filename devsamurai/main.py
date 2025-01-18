@@ -6,8 +6,8 @@ from devsamurai.utils import download_and_save, Settings
 
 s = Settings()
 
-if not s.DOWNLOADS_PATH.exists():
-    s.DOWNLOADS_PATH.mkdir()
+if not s.DOWNLOAD_PATH.exists():
+    s.DOWNLOAD_PATH.mkdir()
 
 
 async def main():
@@ -20,7 +20,7 @@ async def main():
             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
             for row in reader:
                 url = row['url']
-                filename = str(s.DOWNLOADS_PATH / row['name']) + '.zip'
+                filename = str(s.DOWNLOAD_PATH / row['name']) + '.zip'
                 task_id = progress.add_task(
                     f'Downloading {row["name"]}', start=False
                 )
