@@ -2,7 +2,8 @@ import asyncio
 import csv
 import time
 from shutil import rmtree
-from rich.progress import Progress, TimeElapsedColumn, BarColumn, TaskID
+import rich
+from rich.progress import Progress, TimeElapsedColumn, BarColumn
 from devsamurai.utils import download_and_save, Settings
 
 s = Settings()
@@ -50,4 +51,8 @@ if __name__ == '__main__':
     asyncio.run(main())
     end_time = time.time()
     total_time = end_time - start_time
-    print(f"Tempo total de execução: {total_time:.2f} segundos")
+
+    print("\n")
+    print("*" * 50)
+    rich.print(f"[green]• [white]Tempo total de execução: [blue]{total_time:.2f} [white]segundos")
+    print("*" * 50)
