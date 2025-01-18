@@ -1,6 +1,6 @@
 import asyncio
 import csv
-from pathlib import Path
+from shutil import rmtree
 from rich.progress import Progress
 from devsamurai.utils import download_and_save, Settings
 
@@ -8,11 +8,15 @@ s = Settings()
 
 if not s.DOWNLOAD_PATH.exists():
     s.DOWNLOAD_PATH.mkdir()
+else:
+    rmtree(s.DOWNLOAD_PATH)
+    s.DOWNLOAD_PATH.mkdir(exist_ok=True)
 
 
 async def main():
     tasks = []
     csv_file_path = s.CSV_PATH
+    semaphore = asyncio.Semaphore(10)  # Limitar para 10 tarefas simultâneas
 
     progress = Progress()
     with progress:
@@ -25,7 +29,9 @@ async def main():
                     f'Downloading {row["name"]}', start=False
                 )
                 tasks.append(
-                    download_and_save(url, filename, progress, task_id)
+                    download_and_save(
+                        url, filename, progress, task_id, semaphore
+                    )
                 )
 
         await asyncio.gather(*tasks)
