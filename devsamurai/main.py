@@ -25,8 +25,6 @@ async def main():
         "[progress.percentage]{task.percentage:>3.1f}%",
         "•",
         "[progress.filesize]{task.completed}/{task.total}",
-        "•",
-        TimeElapsedColumn(),
     )
     
     with progress:
