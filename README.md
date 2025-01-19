@@ -73,7 +73,7 @@ task start
 > [!IMPORTANT]  
 > Não existe um minimo ou um máximo para a configuração de `PARALLEL_DOWNLOADS`, porém vale lembrar que valores altos vão aumentar o tempo de conexão com o servidor o que pode ocasionar no encerramento da stream por parte do servidor. 
 
-- Na pasta `data/aulas.csv` contem todos os links já extraidos e higienizados para facilitar o processo, porém caso voce queira pode gerar esse arquivo voce mesmo execuntando:
+- Na pasta `data/aulas.csv` contem todos os links já extraidos e higienizados para facilitar o processo, porém caso voce queira pode gerar esse arquivo voce mesmo:
 
 usando uv:
 ```bash
