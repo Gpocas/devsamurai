@@ -10,10 +10,8 @@ s = Settings()
 
 if not s.DOWNLOAD_PATH.exists():
     s.DOWNLOAD_PATH.mkdir()
-
 else:
-    delete_failed_download(s.CSV_PATH)
-
+    delete_failed_download()
 
 async def main():
     tasks = []
@@ -46,7 +44,6 @@ async def main():
                         progress,
                         task_id,
                         semaphore,
-                        csv_file_path,
                         row,
                     )
                 )

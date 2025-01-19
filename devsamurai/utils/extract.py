@@ -7,7 +7,6 @@ from devsamurai.utils.settings import Settings
 
 s = Settings()
 
-
 class ExtractDataWebSite:
     def __init__(self):
         self.url = 'https://class.devsamurai.com.br/'
