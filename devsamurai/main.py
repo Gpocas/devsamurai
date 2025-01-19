@@ -3,7 +3,7 @@ import csv
 import time
 from shutil import rmtree
 import rich
-from rich.progress import Progress, TimeElapsedColumn, BarColumn
+from rich.progress import Progress, BarColumn
 from devsamurai.utils import download_and_save, Settings
 
 s = Settings()
@@ -14,19 +14,20 @@ else:
     rmtree(s.DOWNLOAD_PATH)
     s.DOWNLOAD_PATH.mkdir(exist_ok=True)
 
+
 async def main():
     tasks = []
     csv_file_path = s.CSV_PATH
     semaphore = asyncio.Semaphore(10)  # Limitar para 10 tarefas simultâneas
 
     progress = Progress(
-        "[progress.description]{task.description}",
+        '[progress.description]{task.description}',
         BarColumn(),
-        "[progress.percentage]{task.percentage:>3.1f}%",
-        "•",
-        "[progress.filesize]{task.completed}/{task.total}",
+        '[progress.percentage]{task.percentage:>3.1f}%',
+        '•',
+        '[progress.filesize]{task.completed}/{task.total}',
     )
-    
+
     with progress:
         with open(csv_file_path, newline='') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
@@ -44,13 +45,16 @@ async def main():
 
         await asyncio.gather(*tasks)
 
+
 if __name__ == '__main__':
     start_time = time.time()
     asyncio.run(main())
     end_time = time.time()
     total_time = end_time - start_time
 
-    print("\n")
-    print("*" * 50)
-    rich.print(f"[green]• [white]Tempo total de execução: [blue]{total_time:.2f} [white]segundos")
-    print("*" * 50)
+    print('\n')
+    print('*' * 50)
+    rich.print(
+        f'[green]• [white]Tempo total de execução: [blue]{total_time:.2f} [white]segundos'
+    )
+    print('*' * 50)
