@@ -1,6 +1,6 @@
 # 🥷 DevSamurai Download 
 
-<h3 align="center"><img width="50%" src="https://github.com/gpocas/devsamurai/raw/main/assets/gif.gif" alt="process running" /></h3>
+<h3 align="center"><img width="100%" src="https://github.com/gpocas/devsamurai/raw/main/assets/gif.gif" alt="process running" /></h3>
 
 ### 📃 __Obejtivo:__
 Recentemente foi anunciado que a plataforma de ensino 'DevSamurai' está encerrando suas atividades e com isso liberaram para download varios cursos de diferentes assuntos, esse projeto tem o intuito de ser um facilitador para baixar os arquivos disponiveis. 
