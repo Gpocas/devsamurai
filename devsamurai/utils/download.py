@@ -3,6 +3,9 @@ import csv
 import httpx
 import aiofiles
 from rich.progress import Progress
+from devsamurai.utils.settings import Settings
+
+s = Settings()
 
 client = httpx.AsyncClient(http2=True, timeout=20)
 
@@ -48,3 +51,16 @@ def update_csv(csv_file_path: str, updated_row: dict) -> None:
         )
         writer.writeheader()
         writer.writerows(rows)
+
+
+def delete_failed_download(csv_file_path: str):
+    rows = []
+    with open(csv_file_path, 'r', newline='') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
+        for row in reader:
+            if row.get('status') != 'completed':
+                rows.append(row.get('name'))
+
+    for file in s.DOWNLOAD_PATH.iterdir():
+        if file.stem in rows:
+            file.unlink()

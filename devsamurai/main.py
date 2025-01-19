@@ -4,11 +4,15 @@ import time
 import rich
 from rich.progress import Progress, BarColumn
 from devsamurai.utils import download_and_save, Settings
+from devsamurai.utils.download import delete_failed_download
 
 s = Settings()
 
 if not s.DOWNLOAD_PATH.exists():
     s.DOWNLOAD_PATH.mkdir()
+
+else:
+    delete_failed_download(s.CSV_PATH)
 
 
 async def main():
@@ -47,7 +51,7 @@ async def main():
                     )
                 )
 
-        await asyncio.gather(*tasks)
+        await asyncio.gather(*tasks, return_exceptions=True)
 
 
 if __name__ == '__main__':
