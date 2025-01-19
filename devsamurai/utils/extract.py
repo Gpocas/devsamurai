@@ -54,3 +54,7 @@ class ExtractDataWebSite:
         html = self.get_html()
         links = self.get_links(html)
         self.save_links(links)
+
+
+if __name__ == '__main__':
+    ExtractDataWebSite().genereate_csv()
