@@ -4,7 +4,7 @@ import time
 import rich
 from rich.progress import Progress, BarColumn
 from devsamurai.utils import download_and_save, Settings
-from devsamurai.utils.download import delete_failed_download
+from devsamurai.utils.csv_utils import delete_failed_download
 
 s = Settings()
 
