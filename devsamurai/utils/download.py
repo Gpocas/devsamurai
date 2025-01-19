@@ -1,4 +1,5 @@
 import asyncio
+import csv
 import httpx
 import aiofiles
 from rich.progress import Progress
@@ -12,6 +13,8 @@ async def download_and_save(
     progress: Progress,
     task_id: int,
     semaphore: asyncio.Semaphore,
+    csv_file_path: str,
+    row: dict,
 ) -> None:
     async with semaphore:
         async with client.stream('GET', url) as response:
@@ -25,17 +28,23 @@ async def download_and_save(
 
             # Remove task from progress when complete
             progress.remove_task(task_id)
+            row['status'] = 'completed'
+            update_csv(csv_file_path, row)
 
 
-if __name__ == '__main__':
-    url = r'https://cursos.devsamurai.com.br/Aulas%20ao%20Vivo.zip'
-    filename = 'video.zip'
-    progress = Progress()
-    task_id = progress.add_task('Downloading', total=0)
+def update_csv(csv_file_path: str, updated_row: dict) -> None:
+    rows = []
+    with open(csv_file_path, 'r', newline='') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
+        for row in reader:
+            if row['name'] == updated_row['name']:
+                row['status'] = updated_row['status']
+            rows.append(row)
 
-    with progress:
-        asyncio.run(
-            download_and_save(
-                url, filename, progress, task_id, asyncio.Semaphore(10)
-            )
+    with open(csv_file_path, 'w', newline='') as csvfile:
+        fieldnames = rows[0].keys()
+        writer = csv.DictWriter(
+            csvfile, fieldnames=fieldnames, delimiter=';', quotechar='"'
         )
+        writer.writeheader()
+        writer.writerows(rows)

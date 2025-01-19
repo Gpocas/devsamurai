@@ -1,7 +1,6 @@
 import asyncio
 import csv
 import time
-from shutil import rmtree
 import rich
 from rich.progress import Progress, BarColumn
 from devsamurai.utils import download_and_save, Settings
@@ -10,9 +9,6 @@ s = Settings()
 
 if not s.DOWNLOAD_PATH.exists():
     s.DOWNLOAD_PATH.mkdir()
-else:
-    rmtree(s.DOWNLOAD_PATH)
-    s.DOWNLOAD_PATH.mkdir(exist_ok=True)
 
 
 async def main():
@@ -31,6 +27,9 @@ async def main():
         with open(csv_file_path, newline='') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=';', quotechar='"')
             for row in reader:
+                if row.get('status') == 'completed':
+                    continue
+
                 url = row['url']
                 filename = str(s.DOWNLOAD_PATH / row['name']) + '.zip'
                 task_id = progress.add_task(
@@ -38,7 +37,13 @@ async def main():
                 )
                 tasks.append(
                     download_and_save(
-                        url, filename, progress, task_id, semaphore
+                        url,
+                        filename,
+                        progress,
+                        task_id,
+                        semaphore,
+                        csv_file_path,
+                        row,
                     )
                 )
 
