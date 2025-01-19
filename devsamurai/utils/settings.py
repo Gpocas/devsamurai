@@ -13,3 +13,4 @@ class Settings(BaseSettings):
 
     CSV_PATH: Path = BASE_DIR / 'aulas.csv'
     DOWNLOAD_PATH: Path = BASE_DIR / 'downloads'
+    PARALLEL_DOWNLOADS: int = 10

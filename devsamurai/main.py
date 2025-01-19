@@ -18,8 +18,7 @@ else:
 async def main():
     tasks = []
     csv_file_path = s.CSV_PATH
-    semaphore = asyncio.Semaphore(10)  # Limitar para 10 tarefas simultâneas
-
+    semaphore = asyncio.Semaphore(s.PARALLEL_DOWNLOADS)
     progress = Progress(
         '[progress.description]{task.description}',
         BarColumn(),
