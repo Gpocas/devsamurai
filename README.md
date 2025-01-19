@@ -6,12 +6,7 @@ Recentemente foi anunciado que a plataforma de ensino 'DevSamurai' está encerra
 [__Comunicado Oficial__](https://class.devsamurai.com.br/)
 
 ### 📺 __Demo:__
-<h3 align="center">
- <video width="720" height="360" controls>
-  <source src="https://github.com/gpocas/devsamurai/raw/main/assets/output.mp4" type="video/mp4">
-</video> 
-</h3>
-
+![](assets/clip.gif)
 
 ---
 ### 📒 __Metodologia:__
