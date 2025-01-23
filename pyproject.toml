@@ -10,6 +10,7 @@ requires-python = ">=3.12"
 dependencies = [
     "aiofiles>=24.1.0",
     "httpx[http2]>=0.28.1",
+    "niquests>=3.12.2",
     "parsel>=1.10.0",
     "pydantic-settings>=2.7.1",
     "rich>=13.9.4",

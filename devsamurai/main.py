@@ -3,7 +3,7 @@ import csv
 import time
 import rich
 from rich.progress import Progress, BarColumn
-from devsamurai.utils import download_and_save, Settings
+from devsamurai.utils import niquests_download_and_save, httpx_download_and_save, Settings
 from devsamurai.utils.csv_utils import delete_failed_download
 
 s = Settings()
@@ -38,7 +38,7 @@ async def main():
                     f'Downloading {row["name"]}', start=True
                 )
                 tasks.append(
-                    download_and_save(
+                    niquests_download_and_save(
                         url,
                         filename,
                         progress,
@@ -48,7 +48,7 @@ async def main():
                     )
                 )
 
-        await asyncio.gather(*tasks, return_exceptions=True)
+        await asyncio.gather(*tasks)
 
 
 if __name__ == '__main__':

@@ -1,2 +1,3 @@
-from devsamurai.utils.download import download_and_save
+from devsamurai.utils.httpx_download import httpx_download_and_save
+from devsamurai.utils.niquests_download import niquests_download_and_save
 from devsamurai.utils.settings import Settings
