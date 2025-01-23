@@ -69,7 +69,7 @@ task start
     - `CSV_PATH` o caminho onde está localizado seu arquivo csv
     - `DOWNLOAD_PATH` a pasta onde deverá ser salvos os arquivos baixados
     - `PARALLEL_DOWNLOADS` a quantidade de arquivos simultaneos que serão baixados
-
+    - `BACKEND` define qual backend para download dos arquivos sera usado (httpx ou niquests)
 > [!IMPORTANT]  
 > Não existe um minimo ou um máximo para a configuração de `PARALLEL_DOWNLOADS`, porém vale lembrar que valores altos vão aumentar o tempo de conexão com o servidor o que pode ocasionar no encerramento da stream por parte do servidor. 
 
