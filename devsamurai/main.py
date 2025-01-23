@@ -16,6 +16,7 @@ else:
 async def main():
     tasks = []
     csv_file_path = s.CSV_PATH
+    fn_download = httpx_download_and_save if s.BACKEND == 'httpx' else niquests_download_and_save
     semaphore = asyncio.Semaphore(s.PARALLEL_DOWNLOADS)
     progress = Progress(
         '[progress.description]{task.description}',
@@ -38,7 +39,7 @@ async def main():
                     f'Downloading {row["name"]}', start=True
                 )
                 tasks.append(
-                    niquests_download_and_save(
+                    fn_download(
                         url,
                         filename,
                         progress,
