@@ -22,7 +22,7 @@ async def niquests_download_and_save(
             progress.update(task_id, total=total)
 
             async with aiofiles.open(filename, 'wb') as f:
-                async for chunk in await response.iter_content(1024):
+                async for chunk in await response.iter_content():
                    await f.write(chunk)
                    progress.update(task_id, advance=len(chunk))
 
