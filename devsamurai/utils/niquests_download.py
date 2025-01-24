@@ -16,7 +16,7 @@ async def niquests_download_and_save(
     row: dict,
 ) -> None:
     async with semaphore:
-        async with AsyncSession() as client:
+        async with AsyncSession(disable_http1=True) as client:
             response: Response = await client.get(url, stream=True)
             total = int(response.headers.get('Content-Length', 0))
             progress.update(task_id, total=total)
