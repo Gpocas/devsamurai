@@ -49,7 +49,7 @@ async def main():
                     )
                 )
 
-        await asyncio.gather(*tasks)
+        await asyncio.gather(*tasks, return_exceptions=True)
 
 
 if __name__ == '__main__':
